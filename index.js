@@ -22,6 +22,20 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.post("/", async (req, res) => {
+  try {
+    const result = await axios.get(API_URL);
+    res.render("index.ejs", {
+      url: result.data.message,
+    });
+  } catch (error) {
+    console.log(error.response.data);
+    res.status(500);
+  }
+});
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
